@@ -22,9 +22,6 @@ class Code
     private ?string $identifier = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $code = null;
-
-    #[ORM\Column(length: 255)]
     private ?string $title = null;
 
     #[ORM\ManyToMany(targetEntity: Formation::class, mappedBy: 'codes')]
@@ -52,18 +49,6 @@ class Code
     public function setIdentifier(string $identifier): self
     {
         $this->identifier = $identifier;
-
-        return $this;
-    }
-
-    public function getCode(): ?string
-    {
-        return $this->code;
-    }
-
-    public function setCode(string $code): self
-    {
-        $this->code = $code;
 
         return $this;
     }
