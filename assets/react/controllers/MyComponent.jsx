@@ -1,10 +1,10 @@
 // assets/react/controllers/MyComponent.jsx
 import React from "react";
 
-export default function MyComponent(props) {
+export default function MyComponent({ user }) {
   return (
     <div>
-      <h1>Welcome Home {props.name}</h1>
+      <h1>Welcome Home {user}</h1>
     </div>
   );
 }
