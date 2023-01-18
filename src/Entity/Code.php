@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CodeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CodeRepository::class)]
@@ -21,6 +23,18 @@ class Code
 
     #[ORM\Column(length: 255)]
     private ?string $title = null;
+
+    #[ORM\ManyToMany(targetEntity: Formation::class, mappedBy: 'codes')]
+    private Collection $formations;
+
+    #[ORM\ManyToMany(targetEntity: Skill::class, inversedBy: 'codes')]
+    private Collection $skills;
+
+    public function __construct()
+    {
+        $this->formations = new ArrayCollection();
+        $this->skills = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -59,6 +73,57 @@ class Code
     public function setTitle(string $title): self
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Formation>
+     */
+    public function getFormations(): Collection
+    {
+        return $this->formations;
+    }
+
+    public function addFormation(Formation $formation): self
+    {
+        if (!$this->formations->contains($formation)) {
+            $this->formations->add($formation);
+            $formation->addCode($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFormation(Formation $formation): self
+    {
+        if ($this->formations->removeElement($formation)) {
+            $formation->removeCode($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Skill>
+     */
+    public function getSkills(): Collection
+    {
+        return $this->skills;
+    }
+
+    public function addSkill(Skill $skill): self
+    {
+        if (!$this->skills->contains($skill)) {
+            $this->skills->add($skill);
+        }
+
+        return $this;
+    }
+
+    public function removeSkill(Skill $skill): self
+    {
+        $this->skills->removeElement($skill);
 
         return $this;
     }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\LocationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: LocationRepository::class)]
@@ -24,6 +26,14 @@ class Location
 
     #[ORM\Column]
     private ?int $zip_code = null;
+
+    #[ORM\ManyToMany(targetEntity: Formation::class, mappedBy: 'locations')]
+    private Collection $formations;
+
+    public function __construct()
+    {
+        $this->formations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -74,6 +84,33 @@ class Location
     public function setZipCode(int $zip_code): self
     {
         $this->zip_code = $zip_code;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Formation>
+     */
+    public function getFormations(): Collection
+    {
+        return $this->formations;
+    }
+
+    public function addFormation(Formation $formation): self
+    {
+        if (!$this->formations->contains($formation)) {
+            $this->formations->add($formation);
+            $formation->addLocation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFormation(Formation $formation): self
+    {
+        if ($this->formations->removeElement($formation)) {
+            $formation->removeLocation($this);
+        }
 
         return $this;
     }

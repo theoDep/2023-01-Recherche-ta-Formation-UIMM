@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SkillRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -19,6 +21,14 @@ class Skill
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $descriptive = null;
+
+    #[ORM\ManyToMany(targetEntity: Code::class, mappedBy: 'skills')]
+    private Collection $codes;
+
+    public function __construct()
+    {
+        $this->codes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -45,6 +55,33 @@ class Skill
     public function setDescriptive(string $descriptive): self
     {
         $this->descriptive = $descriptive;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Code>
+     */
+    public function getCodes(): Collection
+    {
+        return $this->codes;
+    }
+
+    public function addCode(Code $code): self
+    {
+        if (!$this->codes->contains($code)) {
+            $this->codes->add($code);
+            $code->addSkill($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCode(Code $code): self
+    {
+        if ($this->codes->removeElement($code)) {
+            $code->removeSkill($this);
+        }
 
         return $this;
     }
