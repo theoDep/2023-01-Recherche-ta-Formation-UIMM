@@ -2,19 +2,22 @@
 
 namespace App\Entity;
 
-use App\Repository\ConditionRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Uid\Uuid;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ConditionRepository;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Bridge\Doctrine\Types\UuidType;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: ConditionRepository::class)]
 #[ORM\Table(name: '`condition`')]
 class Condition
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: UuidType::NAME, unique: true)]
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+    #[ORM\CustomIdGenerator(class: 'doctrine.uuid_generator')]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -28,7 +31,7 @@ class Condition
         $this->formations = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId(): ?Uuid
     {
         return $this->id;
     }
