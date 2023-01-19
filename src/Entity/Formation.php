@@ -39,11 +39,14 @@ class Formation
     #[ORM\ManyToMany(targetEntity: Location::class, inversedBy: 'formations')]
     private Collection $locations;
 
-    #[ORM\ManyToMany(targetEntity: Format::class, inversedBy: 'formations')]
-    private Collection $formats;
-
     #[ORM\ManyToMany(targetEntity: self::class)]
     private Collection $sequels;
+
+    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'formations')]
+    private ?self $format = null;
+
+    #[ORM\OneToMany(mappedBy: 'format', targetEntity: self::class)]
+    private Collection $formations;
 
     public function __construct()
     {
@@ -52,8 +55,8 @@ class Formation
         $this->conditions = new ArrayCollection();
         $this->costs = new ArrayCollection();
         $this->locations = new ArrayCollection();
-        $this->formats = new ArrayCollection();
         $this->sequels = new ArrayCollection();
+        $this->formations = new ArrayCollection();
     }
 
     public function getId(): ?Uuid
@@ -206,30 +209,6 @@ class Formation
     }
 
     /**
-     * @return Collection<int, Format>
-     */
-    public function getFormats(): Collection
-    {
-        return $this->formats;
-    }
-
-    public function addFormat(Format $format): self
-    {
-        if (!$this->formats->contains($format)) {
-            $this->formats->add($format);
-        }
-
-        return $this;
-    }
-
-    public function removeFormat(Format $format): self
-    {
-        $this->formats->removeElement($format);
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, self>
      */
     public function getSequels(): Collection
@@ -249,6 +228,48 @@ class Formation
     public function removeSequel(self $sequel): self
     {
         $this->sequels->removeElement($sequel);
+
+        return $this;
+    }
+
+    public function getFormat(): ?self
+    {
+        return $this->format;
+    }
+
+    public function setFormat(?self $format): self
+    {
+        $this->format = $format;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, self>
+     */
+    public function getFormations(): Collection
+    {
+        return $this->formations;
+    }
+
+    public function addFormation(self $formation): self
+    {
+        if (!$this->formations->contains($formation)) {
+            $this->formations->add($formation);
+            $formation->setFormat($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFormation(self $formation): self
+    {
+        if ($this->formations->removeElement($formation)) {
+            // set the owning side to null (unless already changed)
+            if ($formation->getFormat() === $this) {
+                $formation->setFormat(null);
+            }
+        }
 
         return $this;
     }
