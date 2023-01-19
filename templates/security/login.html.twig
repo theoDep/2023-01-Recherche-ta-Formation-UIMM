@@ -1,14 +1,29 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html>
 
-{% block title %}Log in!{% endblock %}
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Welcome!{% endblock %}</title>
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+  {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+  {% block stylesheets %}
+  {{ encore_entry_link_tags('app') }}
+  {% endblock %}
 
-{% block body %}
-<section class="h-100 gradient-form">
-  <div class="container pt-5 pb-2" style="height: fit-content">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-xl-4">
-        <div class="card rounded-3 text-black">
-          <div class="row g-0">
+  {% block javascripts %}
+  {{ encore_entry_script_tags('app') }}
+  {% endblock %}
+</head>
+
+<body>
+  {% block body %}
+  <section class="h-100 gradient-form">
+    <div class="container pt-5 pb-2" style="height: fit-content">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-xl-4">
+          <div class="card rounded-3 text-black">
+            <div class="row g-0">
               <div class="card-body p-md-5 mx-md-4">
 
                 <div class="text-center pb-5">
@@ -17,46 +32,53 @@
                 </div>
 
                 <form method="post">
-                    {% if error %}
-                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                    {% endif %}
+                  {% if error %}
+                  <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                  {% endif %}
 
-                    {% if app.user %}
-                        <div class="mb-3">
-                            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-                        </div>
-                    {% endif %}
+                  {% if app.user %}
+                  <div class="mb-3">
+                    You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                  </div>
+                  {% endif %}
 
 
                   <div class="form-outline mb-4">
                     <label class="form-label" for="inputEmail">E-mail</label>
-                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control"
+                      autocomplete="email" required autofocus>
                   </div>
 
                   <div class="form-outline mb-4">
                     <label class="form-label" for="inputPassword">Mot de passe</label>
-                    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                    <input type="password" name="password" id="inputPassword" class="form-control"
+                      autocomplete="current-password" required>
                   </div>
 
                   <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
                   <div class="d-flex justify-content-around align-items-center mb-4">
-                        <!-- Checkbox -->
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
-                            <label class="form-check-label" for="form1Example3"> Remember me </label>
-                        </div>
-                        <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3 border-0" type="submit">Valider</button>
+                    <!-- Checkbox -->
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
+                      <label class="form-check-label" for="form1Example3"> Remember me </label>
                     </div>
+                    <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3 border-0"
+                      type="submit">Valider</button>
+                  </div>
 
                 </form>
 
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-{% endblock %}
+  {% endblock %}
+
+</body>
+
+</html>
