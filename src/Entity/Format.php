@@ -21,12 +21,9 @@ class Format
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\ManyToMany(targetEntity: Formation::class, mappedBy: 'formats')]
-    private Collection $formations;
-
     public function __construct()
     {
-        $this->formations = new ArrayCollection();
+
     }
 
     public function getId(): ?Uuid
@@ -46,30 +43,4 @@ class Format
         return $this;
     }
 
-    /**
-     * @return Collection<int, Formation>
-     */
-    public function getFormations(): Collection
-    {
-        return $this->formations;
-    }
-
-    public function addFormation(Formation $formation): self
-    {
-        if (!$this->formations->contains($formation)) {
-            $this->formations->add($formation);
-            $formation->addFormat($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFormation(Formation $formation): self
-    {
-        if ($this->formations->removeElement($formation)) {
-            $formation->removeFormat($this);
-        }
-
-        return $this;
-    }
 }
