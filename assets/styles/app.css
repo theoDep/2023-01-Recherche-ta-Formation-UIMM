@@ -1,3 +1,21 @@
 body {
     background-color: #eee;
 }
+
+.btn-primary,
+.btn-primary:active,
+.btn-primary:visited {
+    background-color: #145774 !important;
+    opacity: 1;
+    transition: 0.2s;
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+}
+
+.form-check-input:checked {
+    background-color: #145774;
+    border-color: #145774;
+    cursor: pointer;
+}
