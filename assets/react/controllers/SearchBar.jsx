@@ -8,7 +8,6 @@ export default ({ search, handleSubmit, handleChange }) => {
   return (
     <>
       <Form onSubmit={handleSubmit}>
-        <h1>{search}</h1>
         <InputGroup className="mb-3">
           <Form.Control type="text" onChange={handleChange} value={search} />
           <Button variant="outline-secondary" type="submit">
