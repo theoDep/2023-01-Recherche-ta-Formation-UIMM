@@ -30,17 +30,13 @@ export default ({ trainings }) => {
 
   return (
     <>
-      <Container className="p-5">
-        <Row className="justify-content-md-center">
-          <Col md={6}>
-            <SearchBar
-              search={search}
-              handleChange={handleChange}
-              handleSubmit={handleSubmit}
-            />
-          </Col>
-        </Row>
-        <Row sm={3} className="justify-content-md-center">
+      <Container fluid className="py-5 px-0">
+          <SearchBar
+            search={search}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+          />
+        <Row sm={3} className="sectionCard justify-content-center">
           {trainingList.map((training) => (
             <TrainingCard training={training} />
           ))}

@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230119075322 extends AbstractMigration
+final class Version20230120083628 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -25,7 +25,7 @@ final class Version20230119075322 extends AbstractMigration
         $this->addSql('CREATE TABLE `condition` (id BINARY(16) NOT NULL COMMENT \'(DC2Type:uuid)\', descriptive LONGTEXT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE cost (id BINARY(16) NOT NULL COMMENT \'(DC2Type:uuid)\', descriptive VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE format (id BINARY(16) NOT NULL COMMENT \'(DC2Type:uuid)\', name VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE formation (id BINARY(16) NOT NULL COMMENT \'(DC2Type:uuid)\', format_id BINARY(16) DEFAULT NULL COMMENT \'(DC2Type:uuid)\', name VARCHAR(255) NOT NULL, studies_level INT NOT NULL, INDEX IDX_404021BFD629F605 (format_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE formation (id BINARY(16) NOT NULL COMMENT \'(DC2Type:uuid)\', format_id BINARY(16) DEFAULT NULL COMMENT \'(DC2Type:uuid)\', name VARCHAR(255) NOT NULL, studies_level INT NOT NULL, duration INT NOT NULL, INDEX IDX_404021BFD629F605 (format_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE formation_code (formation_id BINARY(16) NOT NULL COMMENT \'(DC2Type:uuid)\', code_id BINARY(16) NOT NULL COMMENT \'(DC2Type:uuid)\', INDEX IDX_20CAD5D85200282E (formation_id), INDEX IDX_20CAD5D827DAFE17 (code_id), PRIMARY KEY(formation_id, code_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE formation_job (formation_id BINARY(16) NOT NULL COMMENT \'(DC2Type:uuid)\', job_id BINARY(16) NOT NULL COMMENT \'(DC2Type:uuid)\', INDEX IDX_4C88858C5200282E (formation_id), INDEX IDX_4C88858CBE04EA9 (job_id), PRIMARY KEY(formation_id, job_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE formation_condition (formation_id BINARY(16) NOT NULL COMMENT \'(DC2Type:uuid)\', condition_id BINARY(16) NOT NULL COMMENT \'(DC2Type:uuid)\', INDEX IDX_77ABD89E5200282E (formation_id), INDEX IDX_77ABD89E887793B6 (condition_id), PRIMARY KEY(formation_id, condition_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -34,7 +34,7 @@ final class Version20230119075322 extends AbstractMigration
         $this->addSql('CREATE TABLE formation_formation (formation_source BINARY(16) NOT NULL COMMENT \'(DC2Type:uuid)\', formation_target BINARY(16) NOT NULL COMMENT \'(DC2Type:uuid)\', INDEX IDX_8A3D71627F93715E (formation_source), INDEX IDX_8A3D7162667621D1 (formation_target), PRIMARY KEY(formation_source, formation_target)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE job (id BINARY(16) NOT NULL COMMENT \'(DC2Type:uuid)\', name VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE location (id BINARY(16) NOT NULL COMMENT \'(DC2Type:uuid)\', line_1 VARCHAR(255) NOT NULL, line_2 VARCHAR(255) NOT NULL, city VARCHAR(255) NOT NULL, zip_code INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE skill (id BINARY(16) NOT NULL COMMENT \'(DC2Type:uuid)\', name VARCHAR(255) NOT NULL, descriptive LONGTEXT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE skill (id BINARY(16) NOT NULL COMMENT \'(DC2Type:uuid)\', descriptive LONGTEXT NOT NULL, name VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE `user` (id BINARY(16) NOT NULL COMMENT \'(DC2Type:uuid)\', email VARCHAR(180) NOT NULL, roles JSON NOT NULL, password VARCHAR(255) NOT NULL, UNIQUE INDEX UNIQ_8D93D649E7927C74 (email), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE code_skill ADD CONSTRAINT FK_B268FD3B27DAFE17 FOREIGN KEY (code_id) REFERENCES code (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE code_skill ADD CONSTRAINT FK_B268FD3B5585C142 FOREIGN KEY (skill_id) REFERENCES skill (id) ON DELETE CASCADE');
