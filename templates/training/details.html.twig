@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formation | {{ training.name }}{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="container pt-3 pb-3">
+  <div class="row">
+    <h1>{{ training.name }}</h1>
+    <h2>Equivalence BAC+{{ training.studiesLevel }}</h2>
+    {% for format in training.formats %}
+    <h3> {{ format.name }} </h3>
+    {% endfor %}
+  </div>
+  <div class="row">
+    <div class="col col-9 pt-5 pb-5">
+      {% for code in training.codes %}
+      <div class="row">
+        <div class="col-3 border-start border-end border-primary-subtl">
+          <h6>{{ code.identifier }}</h6>
+          <p>{{ code.title }}</p>
+        </div>
+        <div class="col-9">
+         <p> {% for skill in code.skills %}{{ skill.descriptive | nl2br }}<br />{% endfor %} </p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="col col-2 pt-5 pb-5 text-center">
+      <div class="card text-bg-primary mb-3" style="max-width: 18rem;">
+        <div class="card-header">Duree de la formation</div>
+        <div class="card-body">
+          <p class="card-text">{{ training.duration }} H 00</p>
+        </div>
+      </div>
+      <div class="card text-bg-primary mb-3" style="max-width: 18rem;">
+        <div class="card-header">Resultats</div>
+        <div class="card-body">
+          <p class="card-text">XX %</p>
+        </div>
+      </div>
+      <div class="card text-bg-primary mb-3" style="max-width: 18rem;">
+        <div class="card-header">Certifications</div>
+        <div class="card-body">
+          <p class="card-text">{{ training.codes | length }} RNCP</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row text-align-center">
+    <div class="col">
+      <div class="row">
+        Conditions d'admissions
+        <ul>
+          {% for condition in training.conditions %}
+          <li>{{ condition }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="row">
+        Frais de scolarite
+        <ul>
+          {% for cost in training.costs %}
+          <li>{{ cost }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <div class="row">
+        Metiers visees
+        <ul>
+          {% for job in training.jobs %}
+          <li>{{ job }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="row">
+        Lieu de formation
+        <ul>
+          {% for location in training.locations %}
+          <li>{{ location.line1 }} - {{ location.line2 }} - {{ location.zipcode }} - {{ location.city }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
