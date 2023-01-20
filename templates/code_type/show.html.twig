@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Code{% endblock %}
+
+{% block body %}
+    <h1>Code</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ code.id }}</td>
+            </tr>
+            <tr>
+                <th>Identifier</th>
+                <td>{{ code.identifier }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ code.title }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_code_type_index') }}">back to list</a>
+
+    <a href="{{ path('app_code_type_edit', {'id': code.id}) }}">edit</a>
+
+    {{ include('code_type/_delete_form.html.twig') }}
+{% endblock %}
