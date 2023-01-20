@@ -48,6 +48,9 @@ class Formation
     #[ORM\OneToMany(mappedBy: 'format', targetEntity: self::class)]
     private Collection $formations;
 
+    #[ORM\Column]
+    private ?int $duration = null;
+
     public function __construct()
     {
         $this->codes = new ArrayCollection();
@@ -270,6 +273,18 @@ class Formation
                 $formation->setFormat(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDuration(): ?int
+    {
+        return $this->duration;
+    }
+
+    public function setDuration(int $duration): self
+    {
+        $this->duration = $duration;
 
         return $this;
     }
