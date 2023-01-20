@@ -13,14 +13,19 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/formation/type')]
 class FormationTypeController extends AbstractController
 {
-    #[Route('/', name: 'app_formation_type_index', methods: ['GET'])]
-    public function index(FormationRepository $formationRepository): Response
-    {   
-        $tmp = $formationRepository->findAll();
-        return $this->render('formation_type/index.html.twig', [
-            'formations' => $tmp,
-        ]);
-    }
+
+
+    /**
+     * Récupération Toutes les formations
+     */
+    // #[Route('/', name: 'app_formation_type_index', methods: ['GET'])]
+    // public function index(FormationRepository $formationRepository): Response
+    // {   
+    //     $tmp = $formationRepository->findAll();
+    //     return $this->render('formation_type/index.html.twig', [
+    //         'formations' => $tmp,
+    //     ]);
+    // }
 
     #[Route('/new', name: 'app_formation_type_new', methods: ['GET', 'POST'])]
     public function new(Request $request, FormationRepository $formationRepository): Response
