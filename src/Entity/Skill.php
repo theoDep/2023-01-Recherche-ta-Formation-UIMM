@@ -13,79 +13,86 @@ use Doctrine\Common\Collections\ArrayCollection;
 #[ORM\Entity(repositoryClass: SkillRepository::class)]
 class Skill
 {
-    #[ORM\Id]
-    #[ORM\Column(type: UuidType::NAME, unique: true)]
-    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
-    #[ORM\CustomIdGenerator(class: 'doctrine.uuid_generator')]
-    private ?Uuid $id = null;
+  #[ORM\Id]
+  #[ORM\Column(type: UuidType::NAME, unique: true)]
+  #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+  #[ORM\CustomIdGenerator(class: 'doctrine.uuid_generator')]
+  private ?Uuid $id = null;
 
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $descriptive = null;
+  #[ORM\Column(type: Types::TEXT)]
+  private ?string $descriptive = null;
 
-    #[ORM\ManyToMany(targetEntity: Code::class, mappedBy: 'skills')]
-    private Collection $codes;
+  #[ORM\ManyToMany(targetEntity: Code::class, mappedBy: 'skills')]
+  private Collection $codes;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $name = null;
+  #[ORM\Column(length: 255, nullable: true)]
+  private ?string $name = null;
 
-    public function __construct()
+  public function __construct()
+  {
+    $this->codes = new ArrayCollection();
+  }
+
+  public function __toString(): string
+  {
+    return $this->name ?? $this->descriptive;
+  }
+
+  public function getId(): ?Uuid
+  {
+    return $this->id;
+  }
+
+  public function getDescriptive(): ?string
+  {
+    return $this->descriptive;
+  }
+
+  public function setDescriptive(string $descriptive): self
+  {
+    $this->descriptive = $descriptive;
+
+    return $this;
+  }
+
+  /**
+   * @return Collection<int, Code>
+   */
+  public function getCodes(): Collection
+  {
+    return $this->codes;
+  }
+
+  public function addCode(Code $code): self
+  {
+    if (!$this->codes->contains($code))
     {
-        $this->codes = new ArrayCollection();
+      $this->codes->add($code);
+      $code->addSkill($this);
     }
 
-    public function getId(): ?Uuid
+    return $this;
+  }
+
+  public function removeCode(Code $code): self
+  {
+    if ($this->codes->removeElement($code))
     {
-        return $this->id;
+      $code->removeSkill($this);
     }
 
-    public function getDescriptive(): ?string
-    {
-        return $this->descriptive;
-    }
+    return $this;
+  }
 
-    public function setDescriptive(string $descriptive): self
-    {
-        $this->descriptive = $descriptive;
+  public function getName(): ?string
+  {
+    return $this->name;
+  }
 
-        return $this;
-    }
+  public function setName(?string $name): self
+  {
+    $this->name = $name;
 
-    /**
-     * @return Collection<int, Code>
-     */
-    public function getCodes(): Collection
-    {
-        return $this->codes;
-    }
-
-    public function addCode(Code $code): self
-    {
-        if (!$this->codes->contains($code)) {
-            $this->codes->add($code);
-            $code->addSkill($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCode(Code $code): self
-    {
-        if ($this->codes->removeElement($code)) {
-            $code->removeSkill($this);
-        }
-
-        return $this;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(?string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
+    return $this;
+  }
 }

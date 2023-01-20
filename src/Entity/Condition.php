@@ -14,64 +14,71 @@ use Doctrine\Common\Collections\ArrayCollection;
 #[ORM\Table(name: '`condition`')]
 class Condition
 {
-    #[ORM\Id]
-    #[ORM\Column(type: UuidType::NAME, unique: true)]
-    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
-    #[ORM\CustomIdGenerator(class: 'doctrine.uuid_generator')]
-    private ?Uuid $id = null;
+  #[ORM\Id]
+  #[ORM\Column(type: UuidType::NAME, unique: true)]
+  #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+  #[ORM\CustomIdGenerator(class: 'doctrine.uuid_generator')]
+  private ?Uuid $id = null;
 
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $descriptive = null;
+  #[ORM\Column(type: Types::TEXT)]
+  private ?string $descriptive = null;
 
-    #[ORM\ManyToMany(targetEntity: Formation::class, mappedBy: 'conditions')]
-    private Collection $formations;
+  #[ORM\ManyToMany(targetEntity: Formation::class, mappedBy: 'conditions')]
+  private Collection $formations;
 
-    public function __construct()
+  public function __construct()
+  {
+    $this->formations = new ArrayCollection();
+  }
+
+  public function __toString(): string
+  {
+    return $this->descriptive;
+  }
+
+  public function getId(): ?Uuid
+  {
+    return $this->id;
+  }
+
+  public function getDescriptive(): ?string
+  {
+    return $this->descriptive;
+  }
+
+  public function setDescriptive(string $descriptive): self
+  {
+    $this->descriptive = $descriptive;
+
+    return $this;
+  }
+
+  /**
+   * @return Collection<int, Formation>
+   */
+  public function getFormations(): Collection
+  {
+    return $this->formations;
+  }
+
+  public function addFormation(Formation $formation): self
+  {
+    if (!$this->formations->contains($formation))
     {
-        $this->formations = new ArrayCollection();
+      $this->formations->add($formation);
+      $formation->addCondition($this);
     }
 
-    public function getId(): ?Uuid
+    return $this;
+  }
+
+  public function removeFormation(Formation $formation): self
+  {
+    if ($this->formations->removeElement($formation))
     {
-        return $this->id;
+      $formation->removeCondition($this);
     }
 
-    public function getDescriptive(): ?string
-    {
-        return $this->descriptive;
-    }
-
-    public function setDescriptive(string $descriptive): self
-    {
-        $this->descriptive = $descriptive;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Formation>
-     */
-    public function getFormations(): Collection
-    {
-        return $this->formations;
-    }
-
-    public function addFormation(Formation $formation): self
-    {
-        if (!$this->formations->contains($formation)) {
-            $this->formations->add($formation);
-            $formation->addCondition($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFormation(Formation $formation): self
-    {
-        if ($this->formations->removeElement($formation)) {
-            $formation->removeCondition($this);
-        }
-
-        return $this;
-    }
+    return $this;
+  }
 }

@@ -16,28 +16,30 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class JobRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+  public function __construct(ManagerRegistry $registry)
+  {
+    parent::__construct($registry, Job::class);
+  }
+
+  public function save(Job $entity, bool $flush = false): void
+  {
+    $this->getEntityManager()->persist($entity);
+
+    if ($flush)
     {
-        parent::__construct($registry, Job::class);
+      $this->getEntityManager()->flush();
     }
+  }
 
-    public function save(Job $entity, bool $flush = false): void
+  public function remove(Job $entity, bool $flush = false): void
+  {
+    $this->getEntityManager()->remove($entity);
+
+    if ($flush)
     {
-        $this->getEntityManager()->persist($entity);
-
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
+      $this->getEntityManager()->flush();
     }
-
-    public function remove(Job $entity, bool $flush = false): void
-    {
-        $this->getEntityManager()->remove($entity);
-
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
-    }
+  }
 
 //    /**
 //     * @return Job[] Returns an array of Job objects
