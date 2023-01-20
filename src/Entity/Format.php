@@ -12,35 +12,70 @@ use Doctrine\Common\Collections\ArrayCollection;
 #[ORM\Entity(repositoryClass: FormatRepository::class)]
 class Format
 {
-    #[ORM\Id]
-    #[ORM\Column(type: UuidType::NAME, unique: true)]
-    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
-    #[ORM\CustomIdGenerator(class: 'doctrine.uuid_generator')]
-    private ?Uuid $id = null;
+  #[ORM\Id]
+  #[ORM\Column(type: UuidType::NAME, unique: true)]
+  #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+  #[ORM\CustomIdGenerator(class: 'doctrine.uuid_generator')]
+  private ?Uuid $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $name = null;
+  #[ORM\Column(length: 255)]
+  private ?string $name = null;
 
-    public function __construct()
-    {
+  #[ORM\ManyToMany(targetEntity: Formation::class, mappedBy: 'formats')]
+  private Collection $formations;
 
-    }
+  public function __construct()
+  {
+      $this->formations = new ArrayCollection();
+  }
 
-    public function getId(): ?Uuid
-    {
-        return $this->id;
-    }
+  public function __toString(): string
+  {
+    return $this->name;
+  }
 
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
+  public function getId(): ?Uuid
+  {
+    return $this->id;
+  }
 
-    public function setName(string $name): self
-    {
-        $this->name = $name;
+  public function getName(): ?string
+  {
+    return $this->name;
+  }
 
-        return $this;
-    }
+  public function setName(string $name): self
+  {
+    $this->name = $name;
+
+    return $this;
+  }
+
+  /**
+   * @return Collection<int, Formation>
+   */
+  public function getFormations(): Collection
+  {
+      return $this->formations;
+  }
+
+  public function addFormation(Formation $formation): self
+  {
+      if (!$this->formations->contains($formation)) {
+          $this->formations->add($formation);
+          $formation->addFormat($this);
+      }
+
+      return $this;
+  }
+
+  public function removeFormation(Formation $formation): self
+  {
+      if ($this->formations->removeElement($formation)) {
+          $formation->removeFormat($this);
+      }
+
+      return $this;
+  }
 
 }
