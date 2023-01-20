@@ -4,8 +4,8 @@ import Card from "react-bootstrap/Card";
 export default ({ training }) => {
   const { title, description, level } = training;
   return (
-    <Card className="m-3 w-25">
-      <Card.Header>{level}</Card.Header>
+    <Card className="cardFormation mx-3 px-0">
+      <Card.Header className="w-100 bg-primary text-white">{level}</Card.Header>
       <Card.Body>
         <Card.Title>{title}</Card.Title>
         <Card.Text>{description}</Card.Text>

@@ -1,5 +1,18 @@
 body {
-    background-color: #eee;
+    background-color: rgb(242, 242, 242);
+    overflow-x: hidden;
+}
+
+.bg-white {
+    background-color: #FBFBFB !important;
+}
+
+.bg-primary {
+    background-color: #145774 !important;
+}
+
+.bg-dark-primary {
+    background-color: #164459 !important;
 }
 
 .btn-primary,
@@ -13,9 +26,115 @@ body {
 .btn-primary:hover {
     opacity: 0.9;
 }
+.btn-outline-primary {
+    color: #145774 !important;
+    border-color: #145774 !important; 
+}
+
+.btn-outline-primary:hover {
+    color: #FBFBFB !important;
+    background-color: #145774 !important;
+    border-color: #145774 !important;
+}
+
+.btn-light {
+    background-color: #FBFBFB;
+}
 
 .form-check-input:checked {
     background-color: #145774;
     border-color: #145774;
     cursor: pointer;
+}
+
+.form-control:focus {
+    border-color: #145774 !important;
+    box-shadow: 0 0 0 0 rgba(13,110,253,.25) !important;
+}
+
+#nav-motif {
+    width: 25vw;
+    height: 75px;
+}
+
+#nav-motif2 {
+    width: 20vw;
+    height: 75px;
+}
+
+#navbar > .container-fluid > a > img {
+    margin-left: 40px !important;
+}
+
+#navbar > .container-fluid > button {
+    margin-right: 50px !important;
+}
+
+#nav-motif-triangle {
+    display : inline-block;
+    height : 0;
+    width : 0;
+    border-bottom : 75px solid #145774;
+    border-left : 150px solid transparent;
+}
+
+#nav-motif-triangle2 {
+    display : inline-block;
+    height : 0;
+    width : 0;
+    border-bottom : 75px solid #164459;
+    border-left : 150px solid transparent;
+}
+
+.searchBar {
+    border-color: #145774;
+}
+
+.sectionCard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 350px);
+    grid-template-rows: repeat(auto-fit, 250px);
+    gap: 26px;
+    width: 80%;
+    margin: auto;
+    justify-items: center;
+}
+
+.cardFormation {
+    width: 350px;
+    height: 250px;
+}
+
+@media (max-width: 380px) {
+    .card {
+        width: 85%;
+        height: fit-content;
+    }
+}
+
+@media (max-width: 575.98px) {
+
+    #navbar > .container-fluid > button {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+}
+
+@media (max-width: 908.98px) { 
+
+    #nav-motif {
+        width: 35vw;
+    }
+    
+    #nav-motif2 {
+        width: 30vw;
+    }
+
+    #navbar > .container-fluid > button {
+        margin-right: 20px !important;
+    }
+
+    .sectionCard {
+        width: 100%;
+    }
 }

@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
@@ -14,37 +15,26 @@
         {% endblock %}
     </head>
     <body>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Navbar</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown link
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-              </li>
-            </ul>
+      
+        <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-white p-0">
+          <div class="container-fluid pe-0">
+            <a class="navbar-brand" href="#">
+              <img src="https://uimm.lafabriquedelavenir.fr/wp-content/themes/uimm//assets/img/LOGO_UIMM_QUADRI.svg" style="width: 75px;" alt="logo">
+            </a>
+            <button type="button" onclick="location.href='{{path('app_login')}}';" class="btn btn-light px-4" style="z-index: 1;">Connexion</button>
+            <div class="d-flex position-absolute end-0">
+              <div class="d-flex position-absolute end-0">
+                <div id="nav-motif-triangle2"></div>
+                <div id="nav-motif2" class="bg-dark-primary"></div>
+              </div>
+              <div class="d-flex">
+                <div id="nav-motif-triangle"></div>
+                <div id="nav-motif" class="bg-primary"></div>
+              </div>
+            </div>
           </div>
-        </div>
-      </nav>
+        </nav>
+
         {% block body %}{% endblock %}
     </body>
 </html>
