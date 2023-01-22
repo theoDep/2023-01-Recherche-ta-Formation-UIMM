@@ -1,38 +1,57 @@
-{% extends 'base.html.twig' %}
+{% extends 'backoffice_base.html.twig' %}
 
 {% block title %}Location{% endblock %}
 
 {% block body %}
-    <h1>Location</h1>
+    <div class="page" data-current="lieux"></div>
+    <div class="d-flex justify-content-between mb-5 col-lg-10">
+        <div class="d-flex">
+            <h1>Lieu</h1>
+            {{ include('location_type/_delete_form.html.twig') }}
+        </div>
+        <div class="d-flex">
+            <a class="mt-3" href="{{ path('app_location_type_edit', {'id': location.id}) }}"><img src="{{asset('build/img/edit-icon.svg')}}" alt="icon edit" title="Modifier l'entité"></a>
+            <a class="mt-3 ms-3" href="{{ path('app_location_type_index') }}"><img src="{{asset('build/img/back-icon.svg')}}" alt="icon back" title="Retour en arrière"></a>
+        </div>
+    </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ location.id }}</td>
-            </tr>
-            <tr>
-                <th>Line_1</th>
-                <td>{{ location.line1 }}</td>
-            </tr>
-            <tr>
-                <th>Line_2</th>
-                <td>{{ location.line2 }}</td>
-            </tr>
-            <tr>
-                <th>City</th>
-                <td>{{ location.city }}</td>
-            </tr>
-            <tr>
-                <th>Zip_code</th>
-                <td>{{ location.zipCode }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="col-lg-10">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ location.id }}</td>
+                </tr>
+                <tr>
+                    <th>Ville</th>
+                    <td>{{ location.city }}</td>
+                </tr>
+                <tr>
+                    <th>Ligne 1</th>
+                    <td>{{ location.line1 }}</td>
+                </tr>
+                <tr>
+                    <th>Ligne 2</th>
+                    <td>{{ location.line2 }}</td>
+                </tr>
+                <tr>
+                    <th>Code postal</th>
+                    <td>{{ location.zipCode }}</td>
+                </tr>
+                <tr>
+                    <th>Formations liées</th>
+                    <td>
+                        {% for formation in location.formations %}
+                            {{formation}}<br/>
+                        {% endfor %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-    <a href="{{ path('app_location_type_index') }}">back to list</a>
-
-    <a href="{{ path('app_location_type_edit', {'id': location.id}) }}">edit</a>
-
-    {{ include('location_type/_delete_form.html.twig') }}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('backoffice') }}
+        {{parent()}}
+    {% endblock %}
 {% endblock %}

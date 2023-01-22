@@ -1,6 +1,10 @@
-body {
+body {  
     background-color: rgb(242, 242, 242);
     overflow-x: hidden;
+}
+
+.white {
+    color: #FBFBFB !important;
 }
 
 .bg-white {
@@ -19,6 +23,7 @@ body {
 .btn-primary:active,
 .btn-primary:visited {
     background-color: #145774 !important;
+    border-color: #145774 !important;
     opacity: 1;
     transition: 0.2s;
 }
@@ -50,6 +55,14 @@ body {
 .form-control:focus {
     border-color: #145774 !important;
     box-shadow: 0 0 0 0 rgba(13,110,253,.25) !important;
+}
+
+.nav-link {
+    color: black;
+}
+
+.nav-link:hover {
+    color: #145774;
 }
 
 #nav-motif {

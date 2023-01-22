@@ -13,6 +13,7 @@ class FormatType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add('formations')
         ;
     }
 

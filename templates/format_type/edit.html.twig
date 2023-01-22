@@ -1,13 +1,21 @@
-{% extends 'base.html.twig' %}
+{% extends 'backoffice_base.html.twig' %}
 
 {% block title %}Edit Format{% endblock %}
 
 {% block body %}
-    <h1>Edit Format</h1>
+    <div class="page" data-current="format"></div>
+    <div class="d-flex justify-content-between mb-5 col-lg-10">
+        <div class="d-flex">
+            <h1>Éditer un format</h1>
+            {{ include('format_type/_delete_form.html.twig') }}
+        </div>
+        <a class="mt-3" href="{{ path('app_format_type_index') }}"><img src="{{asset('build/img/back-icon.svg')}}" alt="icon back" title="Retour en arrière"></a>
+    </div>
 
-    {{ include('format_type/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('format_type/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <a href="{{ path('app_format_type_index') }}">back to list</a>
-
-    {{ include('format_type/_delete_form.html.twig') }}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('backoffice') }}
+        {{parent()}}
+    {% endblock %}
 {% endblock %}

@@ -1,10 +1,21 @@
-{% extends 'base.html.twig' %}
+{% extends 'backoffice_base.html.twig' %}
 
 {% block title %}Format{% endblock %}
 
 {% block body %}
-    <h1>Format</h1>
+    <div class="page" data-current="format"></div>
+    <div class="d-flex justify-content-between mb-5 col-lg-10">
+        <div class="d-flex">
+            <h1>Format</h1>
+            {{ include('format_type/_delete_form.html.twig') }}
+        </div>
+        <div class="d-flex">
+            <a class="mt-3" href="{{ path('app_format_type_edit', {'id': format.id}) }}"><img src="{{asset('build/img/edit-icon.svg')}}" alt="icon edit" title="Modifier l'entité"></a>
+            <a class="mt-3 ms-3" href="{{ path('app_format_type_index') }}"><img src="{{asset('build/img/back-icon.svg')}}" alt="icon back" title="Retour en arrière"></a>
+        </div>
+    </div>
 
+<div class="col-lg-10">
     <table class="table">
         <tbody>
             <tr>
@@ -12,15 +23,23 @@
                 <td>{{ format.id }}</td>
             </tr>
             <tr>
-                <th>Name</th>
+                <th>Nom</th>
                 <td>{{ format.name }}</td>
+            </tr>
+            <tr>
+                <th>Formations liées</th>
+                <td>
+                    {% for formation in format.formations %}
+                        {{formation}}<br/>
+                    {% endfor %}
+                </td>
             </tr>
         </tbody>
     </table>
+</div>
 
-    <a href="{{ path('app_format_type_index') }}">back to list</a>
-
-    <a href="{{ path('app_format_type_edit', {'id': format.id}) }}">edit</a>
-
-    {{ include('format_type/_delete_form.html.twig') }}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('backoffice') }}
+        {{parent()}}
+    {% endblock %}
 {% endblock %}

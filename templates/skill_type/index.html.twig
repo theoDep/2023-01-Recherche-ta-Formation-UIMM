@@ -1,28 +1,32 @@
-{% extends 'base.html.twig' %}
+{% extends 'backoffice_base.html.twig' %}
 
 {% block title %}Skill index{% endblock %}
 
 {% block body %}
-    <h1>Skill index</h1>
+    <div class="page" data-current="competences"></div>
+    <div class="d-flex justify-content-between mb-5">
+        <h1>Compétences</h1>
+        <a href="{{ path('app_skill_type_new') }}"><img src="{{asset('build/img/plus-icon.svg')}}" alt="icon plus" title="Ajouter une compétence"></a>
+    </div>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Descriptive</th>
-                <th>actions</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for skill in skills %}
             <tr>
-                <td>{{ skill.id }}</td>
                 <td>{{ skill.name }}</td>
                 <td>{{ skill.descriptive }}</td>
                 <td>
-                    <a href="{{ path('app_skill_type_show', {'id': skill.id}) }}">show</a>
-                    <a href="{{ path('app_skill_type_edit', {'id': skill.id}) }}">edit</a>
+                    <div class="d-flex justify-content-around">
+                        <a href="{{ path('app_skill_type_show', {'id': skill.id}) }}"><img src="{{asset('build/img/show-icon.svg')}}" class="me-2" alt="icon show" title="Voir l'entité"></a>
+                        <a href="{{ path('app_skill_type_edit', {'id': skill.id}) }}"><img src="{{asset('build/img/edit-icon.svg')}}" alt="icon edit" title="Modifier l'entité"></a>
+                    </div>
                 </td>
             </tr>
         {% else %}
@@ -33,5 +37,8 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_skill_type_new') }}">Create new</a>
+    {% block javascripts %}
+        {{ encore_entry_script_tags('backoffice') }}
+        {{parent()}}
+    {% endblock %}
 {% endblock %}

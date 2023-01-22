@@ -1,32 +1,36 @@
-{% extends 'base.html.twig' %}
+{% extends 'backoffice_base.html.twig' %}
 
 {% block title %}Location index{% endblock %}
 
 {% block body %}
-    <h1>Location index</h1>
+    <div class="page" data-current="lieux"></div>
+    <div class="d-flex justify-content-between mb-5">
+        <h1>Lieux</h1>
+        <a href="{{ path('app_location_type_new') }}"><img src="{{asset('build/img/plus-icon.svg')}}" alt="icon plus" title="Ajouter un lieu"></a>
+    </div>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Line_1</th>
-                <th>Line_2</th>
-                <th>City</th>
-                <th>Zip_code</th>
-                <th>actions</th>
+                <th>Ville</th>
+                <th>Ligne 1</th>
+                <th>Ligne 2</th>
+                <th>Code postal</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for location in locations %}
             <tr>
-                <td>{{ location.id }}</td>
+                <td>{{ location.city }}</td>
                 <td>{{ location.line1 }}</td>
                 <td>{{ location.line2 }}</td>
-                <td>{{ location.city }}</td>
                 <td>{{ location.zipCode }}</td>
                 <td>
-                    <a href="{{ path('app_location_type_show', {'id': location.id}) }}">show</a>
-                    <a href="{{ path('app_location_type_edit', {'id': location.id}) }}">edit</a>
+                    <div class="d-flex justify-content-around">
+                        <a href="{{ path('app_location_type_show', {'id': location.id}) }}"><img src="{{asset('build/img/show-icon.svg')}}" class="me-2" alt="icon show" title="Voir l'entité"></a>
+                        <a href="{{ path('app_location_type_edit', {'id': location.id}) }}"><img src="{{asset('build/img/edit-icon.svg')}}" alt="icon edit" title="Modifier l'entité"></a>
+                    </div>
                 </td>
             </tr>
         {% else %}
@@ -37,5 +41,8 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_location_type_new') }}">Create new</a>
+    {% block javascripts %}
+        {{ encore_entry_script_tags('backoffice') }}
+        {{parent()}}
+    {% endblock %}
 {% endblock %}

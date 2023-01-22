@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="{{asset('build/img/logo.svg')}}">
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+        <div class="d-flex">
+            <div class="d-flex flex-column flex-shrink-0 p-3 bg-light sticky-top" style="height: 100vh; width: 280px;">
+                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 mx-auto link-dark text-decoration-none">
+                <img src="{{asset('build/img/logo.svg')}}" style="width: 75px;" alt="logo">
+                </a>
+                <hr>
+                <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a href="{{path('app_formation_type_index')}}" id="formations" class="nav-link">
+                        Formations
+                    </a>
+                </li>
+                <li>
+                    <a href="{{path('app_code_type_index')}}" id="codes" class="nav-link">
+                        Codes
+                    </a>
+                </li>
+                <li>
+                    <a href="{{path('app_skill_type_index')}}" id="competences" class="nav-link">
+                        Compétences
+                    </a>
+                </li>
+                <li>
+                    <a href="{{path('app_job_type_index')}}" id="metiers" class="nav-link">
+                        Métiers
+                    </a>
+                </li>
+                <li>
+                    <a href="{{path('app_cost_type_index')}}" id="frais" class="nav-link">
+                        Frais de scolarité
+                    </a>
+                </li>
+                <li>
+                    <a href="{{path('app_condition_type_index')}}" id="conditions" class="nav-link">
+                        Conditions d'admission
+                    </a>
+                </li>
+                <li>
+                    <a href="{{path('app_format_type_index')}}" id="format" class="nav-link">
+                        Format
+                    </a>
+                </li>
+                <li>
+                    <a href="{{path('app_location_type_index')}}" id="lieux" class="nav-link">
+                        Lieux
+                    </a>
+                </li>
+                </ul>
+                <hr>
+                <div>
+                    <a href="{{path('app_logout')}}" class="nav-link link-dark ms-3">
+                        Déconnexion
+                    </a>
+                </div>
+            </div>
+            <div class="container m-5">
+                {% block body %}{% endblock %}
+            </div>
+        </div>
+    </body>
+</html>

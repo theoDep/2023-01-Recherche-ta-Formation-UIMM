@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/code/type')]
+#[Route('/backoffice/code/type')]
 class CodeTypeController extends AbstractController
 {
     #[Route('/', name: 'app_code_type_index', methods: ['GET'])]

@@ -1,28 +1,30 @@
-{% extends 'base.html.twig' %}
+{% extends 'backoffice_base.html.twig' %}
 
 {% block title %}Formation index{% endblock %}
 
 {% block body %}
-    <h1>Formation index</h1>
+    <div class="page" data-current="formations"></div>
+    <div class="d-flex justify-content-between mb-5">
+        <h1>Formations</h1>
+        <a href="{{ path('app_formation_type_new') }}"><img src="{{asset('build/img/plus-icon.svg')}}" alt="icon plus" title="Ajouter une formation"></a>
+    </div>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Studies_level</th>
-                <th>actions</th>
+                <th>Nom</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
         {% for formation in formations %}
             <tr>
-                <td>{{ formation.id }}</td>
                 <td>{{ formation.name }}</td>
-                <td>{{ formation.studiesLevel }}</td>
                 <td>
-                    <a href="{{ path('app_formation_type_show', {'id': formation.id}) }}">show</a>
-                    <a href="{{ path('app_formation_type_edit', {'id': formation.id}) }}">edit</a>
+                    <div class="d-flex justify-content-around">
+                        <a href="{{ path('app_formation_type_show', {'id': formation.id}) }}"><img src="{{asset('build/img/show-icon.svg')}}" class="me-2" alt="icon show" title="Voir l'entité"></a>
+                        <a href="{{ path('app_formation_type_edit', {'id': formation.id}) }}"><img src="{{asset('build/img/edit-icon.svg')}}" alt="icon edit" title="Modifier l'entité"></a>
+                    </div>
                 </td>
             </tr>
         {% else %}
@@ -33,5 +35,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_formation_type_new') }}">Create new</a>
+    {% block javascripts %}
+        {{ encore_entry_script_tags('backoffice') }}
+        {{parent()}}
+    {% endblock %}
+
 {% endblock %}

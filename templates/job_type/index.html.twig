@@ -1,26 +1,30 @@
-{% extends 'base.html.twig' %}
+{% extends 'backoffice_base.html.twig' %}
 
 {% block title %}Job index{% endblock %}
 
 {% block body %}
-    <h1>Job index</h1>
+    <div class="page" data-current="metiers"></div>
+    <div class="d-flex justify-content-between mb-5">
+        <h1>Métiers</h1>
+        <a href="{{ path('app_job_type_new') }}"><img src="{{asset('build/img/plus-icon.svg')}}" alt="icon plus" title="Ajouter un métier"></a>
+    </div>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>actions</th>
+                <th>Nom</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for job in jobs %}
             <tr>
-                <td>{{ job.id }}</td>
                 <td>{{ job.name }}</td>
                 <td>
-                    <a href="{{ path('app_job_type_show', {'id': job.id}) }}">show</a>
-                    <a href="{{ path('app_job_type_edit', {'id': job.id}) }}">edit</a>
+                    <div class="d-flex justify-content-around">
+                        <a href="{{ path('app_job_type_show', {'id': job.id}) }}"><img src="{{asset('build/img/show-icon.svg')}}" class="me-2" alt="icon show" title="Voir l'entité"></a>
+                        <a href="{{ path('app_job_type_edit', {'id': job.id}) }}"><img src="{{asset('build/img/edit-icon.svg')}}" alt="icon edit" title="Modifier l'entité"></a>
+                    </div>
                 </td>
             </tr>
         {% else %}
@@ -31,5 +35,8 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_job_type_new') }}">Create new</a>
+    {% block javascripts %}
+        {{ encore_entry_script_tags('backoffice') }}
+        {{parent()}}
+    {% endblock %}
 {% endblock %}

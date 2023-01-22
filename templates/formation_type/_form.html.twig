@@ -1,4 +1,89 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+    <div class="row mt-4">
+        <div class="col-lg-10">
+            {{ form_label(form.name, "Nom de la formation :") }}
+            {{ form_widget(form.name) }}
+            {{ form_errors(form.name) }}
+        </div>   
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-10">
+            {{ form_label(form.studies_level, "Niveau d'étude :") }}
+            {{ form_widget(form.studies_level) }}
+            {{ form_errors(form.studies_level) }}
+        </div>   
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-10">
+            {{ form_label(form.duration, 'Durée :') }}
+            {{ form_widget(form.duration) }}
+            {{ form_errors(form.duration) }}
+        </div>   
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-10">
+            {{ form_label(form.codes, 'Codes :') }}
+            {{ form_widget(form.codes) }}
+            {{ form_errors(form.codes) }}
+        </div>   
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-10">
+            {{ form_label(form.jobs, 'Métiers visés :') }}
+            {{ form_widget(form.jobs) }}
+            {{ form_errors(form.jobs) }}
+        </div>   
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-10">
+            {{ form_label(form.conditions, "Conditions d'admission :") }}
+            {{ form_widget(form.conditions) }}
+            {{ form_errors(form.conditions) }}
+        </div>   
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-10">
+            {{ form_label(form.costs, "Frais de scolarité :") }}
+            {{ form_widget(form.costs) }}
+            {{ form_errors(form.costs) }}
+        </div>   
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-10">
+            {{ form_label(form.locations, "Lieux :") }}
+            {{ form_widget(form.locations) }}
+            {{ form_errors(form.locations) }}
+        </div>   
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-10">
+            {{ form_label(form.formats, "Formats :") }}
+            {{ form_widget(form.formats) }}
+            {{ form_errors(form.formats) }}
+        </div>   
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-10">
+            {{ form_label(form.sequels, "Suites possibles :") }}
+            {{ form_widget(form.sequels) }}
+            {{ form_errors(form.sequels) }}
+        </div>   
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-lg-10 d-flex justify-content-end">
+            <button class="btn btn-primary my-3">{{ button_label|default('Sauvegarder') }}</button>
+        </div>
+    </div>
 {{ form_end(form) }}
