@@ -4,13 +4,15 @@
 
 {% block body %}
     <div class="page" data-current="codes"></div>
-    <h1>Edit Code</h1>
+    <div class="d-flex justify-content-between mb-5 col-lg-10">
+        <div class="d-flex">
+            <h1>Éditer un code</h1>
+            {{ include('code_type/_delete_form.html.twig') }}
+        </div>
+        <a class="mt-3" href="{{ path('app_code_type_index') }}"><img src="{{asset('build/img/back-icon.svg')}}" alt="icon back" title="Retour en arrière"></a>
+    </div>
 
-    {{ include('code_type/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_code_type_index') }}">back to list</a>
-
-    {{ include('code_type/_delete_form.html.twig') }}
+    {{ include('code_type/_form.html.twig', {'button_label': 'Modifier'}) }}
 
     {% block javascripts %}
         {{ encore_entry_script_tags('backoffice') }}

@@ -1,4 +1,41 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    {% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+    <div class="row mt-4">
+        <div class="col-lg-10">
+            {{ form_label(form.identifier, "Identifiant :") }}
+            {{ form_widget(form.identifier) }}
+            {{ form_errors(form.identifier) }}
+        </div>   
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-10">
+            {{ form_label(form.title, "Titre :") }}
+            {{ form_widget(form.title) }}
+            {{ form_errors(form.title) }}
+        </div>   
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-10">
+            {{ form_label(form.skills, 'Compétences :') }}
+            {{ form_widget(form.skills) }}
+            {{ form_errors(form.skills) }}
+        </div>   
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-10">
+            {{ form_label(form.formations, 'Formations liées :') }}
+            {{ form_widget(form.formations) }}
+            {{ form_errors(form.formations) }}
+        </div>   
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-lg-10 d-flex justify-content-end">
+            <button class="btn btn-primary my-3">{{ button_label|default('Sauvegarder') }}</button>
+        </div>
+    </div>
 {{ form_end(form) }}

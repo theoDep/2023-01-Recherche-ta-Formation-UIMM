@@ -1,4 +1,49 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    {% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+    <div class="row mt-4">
+        <div class="col-lg-10">
+            {{ form_label(form.line_1, "Ligne 1 :") }}
+            {{ form_widget(form.line_1) }}
+            {{ form_errors(form.line_1) }}
+        </div>   
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-10">
+            {{ form_label(form.line_2, "Ligne 2 :") }}
+            {{ form_widget(form.line_2) }}
+            {{ form_errors(form.line_2) }}
+        </div>   
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-10">
+            {{ form_label(form.city, 'Ville :') }}
+            {{ form_widget(form.city) }}
+            {{ form_errors(form.city) }}
+        </div>   
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-10">
+            {{ form_label(form.zip_code, 'Codes :') }}
+            {{ form_widget(form.zip_code) }}
+            {{ form_errors(form.zip_code) }}
+        </div>   
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-10">
+            {{ form_label(form.formations, 'Formations liées :') }}
+            {{ form_widget(form.formations) }}
+            {{ form_errors(form.formations) }}
+        </div>   
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-lg-10 d-flex justify-content-end">
+            <button class="btn btn-primary my-3">{{ button_label|default('Sauvegarder') }}</button>
+        </div>
+    </div>
 {{ form_end(form) }}

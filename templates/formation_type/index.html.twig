@@ -13,7 +13,6 @@
         <thead>
             <tr>
                 <th>Nom</th>
-                <th>Niveau d'étude</th>
                 <th></th>
             </tr>
         </thead>
@@ -21,7 +20,6 @@
         {% for formation in formations %}
             <tr>
                 <td>{{ formation.name }}</td>
-                <td>{{ formation.studiesLevel }}</td>
                 <td>
                     <div class="d-flex justify-content-around">
                         <a href="{{ path('app_formation_type_show', {'id': formation.id}) }}"><img src="{{asset('build/img/show-icon.svg')}}" class="me-2" alt="icon show" title="Voir l'entité"></a>

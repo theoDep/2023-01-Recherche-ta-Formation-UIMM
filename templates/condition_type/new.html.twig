@@ -4,11 +4,12 @@
 
 {% block body %}
     <div class="page" data-current="conditions"></div>
-    <h1>Create new Condition</h1>
+    <div class="d-flex justify-content-between mb-5 col-lg-10">
+        <h1>Créer une nouvelle condition d'admission</h1>
+        <a class="mt-3" href="{{ path('app_condition_type_index') }}"><img src="{{asset('build/img/back-icon.svg')}}" alt="icon back" title="Retour en arrière"></a>
+    </div>
 
     {{ include('condition_type/_form.html.twig') }}
-
-    <a href="{{ path('app_condition_type_index') }}">back to list</a>
 
     {% block javascripts %}
         {{ encore_entry_script_tags('backoffice') }}

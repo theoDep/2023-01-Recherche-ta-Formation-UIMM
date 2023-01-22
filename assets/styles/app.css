@@ -23,6 +23,7 @@ body {
 .btn-primary:active,
 .btn-primary:visited {
     background-color: #145774 !important;
+    border-color: #145774 !important;
     opacity: 1;
     transition: 0.2s;
 }
