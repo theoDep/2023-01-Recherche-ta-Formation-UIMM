@@ -1,8 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends 'backoffice_base.html.twig' %}
 
 {% block title %}Formation index{% endblock %}
 
 {% block body %}
+{% set page = 'formations' %}
     <h1>Formation index</h1>
 
     <table class="table">
@@ -34,4 +35,12 @@
     </table>
 
     <a href="{{ path('app_formation_type_new') }}">Create new</a>
+
+    <script>
+        var currentUrl = window.location.href;           
+        var page = '{{ page }}';
+
+        document.getElementById(page).classList.add('bg-primary')
+        document.getElementById(page).classList.add('white')
+    </script>
 {% endblock %}
