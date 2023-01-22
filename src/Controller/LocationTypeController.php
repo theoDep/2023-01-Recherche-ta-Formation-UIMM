@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/location/type')]
+#[Route('/backoffice/location/type')]
 class LocationTypeController extends AbstractController
 {
     #[Route('/', name: 'app_location_type_index', methods: ['GET'])]

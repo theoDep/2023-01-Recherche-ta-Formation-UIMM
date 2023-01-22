@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/format/type')]
+#[Route('/backoffice/format/type')]
 class FormatTypeController extends AbstractController
 {
     #[Route('/', name: 'app_format_type_index', methods: ['GET'])]

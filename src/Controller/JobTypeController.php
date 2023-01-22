@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/job/type')]
+#[Route('/backoffice/job/type')]
 class JobTypeController extends AbstractController
 {
     #[Route('/', name: 'app_job_type_index', methods: ['GET'])]
