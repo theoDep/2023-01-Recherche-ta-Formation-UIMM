@@ -1,11 +1,17 @@
-{% extends 'base.html.twig' %}
+{% extends 'backoffice_base.html.twig' %}
 
 {% block title %}New Cost{% endblock %}
 
 {% block body %}
+    <div class="page" data-current="frais"></div>
     <h1>Create new Cost</h1>
 
     {{ include('cost_type/_form.html.twig') }}
 
     <a href="{{ path('app_cost_type_index') }}">back to list</a>
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('backoffice') }}
+        {{parent()}}
+    {% endblock %}
 {% endblock %}

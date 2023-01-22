@@ -1,8 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends 'backoffice_base.html.twig' %}
 
 {% block title %}Cost{% endblock %}
 
 {% block body %}
+    <div class="page" data-current="frais"></div>
     <h1>Cost</h1>
 
     <table class="table">
@@ -20,7 +21,12 @@
 
     <a href="{{ path('app_cost_type_index') }}">back to list</a>
 
-    <a href="{{ path('app_cost_type_edit', {'id': cost.id}) }}">edit</a>
+    <a href="{{ path('app_cost_type_edit', {'id': cost.id}) }}"><img src="{{asset('build/img/edit-icon.svg')}}" alt="icon edit" title="Modifier l'entité"></a>
 
     {{ include('cost_type/_delete_form.html.twig') }}
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('backoffice') }}
+        {{parent()}}
+    {% endblock %}
 {% endblock %}
