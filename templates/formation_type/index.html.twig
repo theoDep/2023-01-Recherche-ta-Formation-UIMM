@@ -22,8 +22,9 @@
                 <td>{{ formation.name }}</td>
                 <td>
                     <div class="d-flex justify-content-around">
-                        <a href="{{ path('app_formation_type_show', {'id': formation.id}) }}"><img src="{{asset('build/img/show-icon.svg')}}" class="me-2" alt="icon show" title="Voir l'entité"></a>
-                        <a href="{{ path('app_formation_type_edit', {'id': formation.id}) }}"><img src="{{asset('build/img/edit-icon.svg')}}" alt="icon edit" title="Modifier l'entité"></a>
+                        <a href="{{ path('app_formation_type_show', {'id': formation.id}) }}"><img src="{{asset('build/img/show-icon.svg')}}" alt="icon show" title="Voir l'entité"></a>
+                        <a href="{{ path('app_formation_type_edit', {'id': formation.id}) }}"><img src="{{asset('build/img/edit-icon.svg')}}" class="mx-2" alt="icon edit" title="Modifier l'entité"></a>
+                        <a href="{{ path('app_training_details', {'id': formation.id}) }}"><img src="{{asset('build/img/preview-icon.svg')}}" class="mt-1" alt="icon edit" title="Aperçu de l'entité"></a>
                     </div>
                 </td>
             </tr>
