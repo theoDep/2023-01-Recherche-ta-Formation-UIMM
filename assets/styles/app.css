@@ -11,6 +11,10 @@ body {
     background-color: #FBFBFB !important;
 }
 
+.primary {
+    color: #145774 !important;
+}
+
 .bg-primary {
     background-color: #145774 !important;
 }

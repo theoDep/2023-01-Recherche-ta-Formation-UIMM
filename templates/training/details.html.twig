@@ -4,45 +4,49 @@
 
 {% block body %}
 
+
+<div class="container py-5">
 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') and is_granted('ROLE_ADMIN') %}
   <a class="position-fixed bottom-0 start-0" href="{{ path('app_formation_type_edit', {'id': training.id}) }}"><img src="{{asset('build/img/edit-icon.svg')}}" class="m-2" alt="icon edit" title="Modifier l'entité"></a>
 {% endif %}
 <div class="container pt-3 pb-3">
   <div class="row">
-    <h1>{{ training.name }}</h1>
-    <h2>Equivalence BAC+{{ training.studiesLevel }}</h2>
+    <h1 class="primary">{{ training.name|upper }}</h1>
+    <h3>Equivalence BAC+{{ training.studiesLevel }}</h3>
     {% for format in training.formats %}
-    <h3> {{ format.name }} </h3>
+    <h4> {{ format.name }} </h4>
     {% endfor %}
   </div>
   <div class="row">
     <div class="col col-9 pt-5 pb-5">
       {% for code in training.codes %}
-      <div class="row">
-        <div class="col-3 border-start border-end border-primary-subtl">
-          <h6>{{ code.identifier }}</h6>
-          <p>{{ code.title }}</p>
-        </div>
-        <div class="col-9">
-         <p> {% for skill in code.skills %}{{ skill.descriptive | nl2br }}<br />{% endfor %} </p>
-        </div>
-      </div>
+        {# {% if isnot code.isMain %} #}
+          <div class="row">
+            <div class="col-lg-3 border-start border-end border-primary-subtl">
+              <h6><strong>{{ code.identifier }}</strong></h6>
+              <p>{{ code.title }}</p>
+            </div>
+            <div class="col-lg-9">
+            <p> {% for skill in code.skills %}{{ skill.descriptive | nl2br }}<br />{% endfor %} </p>
+            </div>
+          </div>
+        {# {% endif %} #}
       {% endfor %}
     </div>
-    <div class="col col-2 pt-5 pb-5 text-center">
-      <div class="card text-bg-primary mb-3" style="max-width: 18rem;">
-        <div class="card-header">Duree de la formation</div>
+    <div class="d-none d-lg-block col col-2 pt-5 pb-5 text-center">
+      <div class="card bg-primary white mb-3" style="max-width: 18rem;">
+        <div class="card-header">Durée de la formation</div>
         <div class="card-body">
           <p class="card-text">{{ training.duration }} H 00</p>
         </div>
       </div>
-      <div class="card text-bg-primary mb-3" style="max-width: 18rem;">
+      <div class="card bg-primary white mb-3" style="max-width: 18rem;">
         <div class="card-header">Resultats</div>
         <div class="card-body">
           <p class="card-text">XX %</p>
         </div>
       </div>
-      <div class="card text-bg-primary mb-3" style="max-width: 18rem;">
+      <div class="card bg-primary white mb-3" style="max-width: 18rem;">
         <div class="card-header">Certifications</div>
         <div class="card-body">
           <p class="card-text">{{ training.codes | length }} RNCP</p>
@@ -51,17 +55,19 @@
     </div>
   </div>
   <div class="row text-align-center">
-    <div class="col">
-      <div class="row">
+    <div class="col-lg-6">
+      <div class="row"><strong class="primary fs-5">
         Conditions d'admissions
+        </strong>
         <ul>
           {% for condition in training.conditions %}
           <li>{{ condition }}</li>
           {% endfor %}
         </ul>
       </div>
-      <div class="row">
+      <div class="row"><strong class="primary fs-5">
         Frais de scolarite
+        </strong>
         <ul>
           {% for cost in training.costs %}
           <li>{{ cost }}</li>
@@ -69,22 +75,44 @@
         </ul>
       </div>
     </div>
-    <div class="col">
-      <div class="row">
-        Metiers visees
+    <div class="col-lg-6">
+      <div class="row"><strong class="primary fs-5">
+        Metiers visées
+        </strong>
         <ul>
           {% for job in training.jobs %}
           <li>{{ job }}</li>
           {% endfor %}
         </ul>
       </div>
-      <div class="row">
+      <div class="row"><strong class="primary fs-5">
         Lieu de formation
+        </strong>
         <ul>
           {% for location in training.locations %}
           <li>{{ location.line1 }} - {{ location.line2 }} - {{ location.zipcode }} - {{ location.city }}</li>
           {% endfor %}
         </ul>
+      </div>
+      <div class="d-flex flex-wrap d-lg-none pt-5 pb-5 text-center">
+        <div class="card bg-primary white mb-3 mx-auto w-75" style="max-width: 18rem;">
+          <div class="card-header">Durée de la formation</div>
+          <div class="card-body">
+            <p class="card-text">{{ training.duration }} H 00</p>
+          </div>
+        </div>
+        <div class="card bg-primary white mb-3 mx-auto w-75" style="max-width: 18rem;">
+          <div class="card-header">Resultats</div>
+          <div class="card-body">
+            <p class="card-text">XX %</p>
+          </div>
+        </div>
+        <div class="card bg-primary white mb-3 mx-auto w-75" style="max-width: 18rem;">
+          <div class="card-header">Certifications</div>
+          <div class="card-body">
+            <p class="card-text">{{ training.codes | length }} RNCP</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
