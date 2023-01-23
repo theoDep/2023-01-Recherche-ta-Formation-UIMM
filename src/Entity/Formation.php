@@ -8,6 +8,7 @@ use App\Repository\FormationRepository;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Bridge\Doctrine\Types\UuidType;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 #[ORM\Entity(repositoryClass: FormationRepository::class)]
 class Formation
@@ -24,27 +25,34 @@ class Formation
   #[ORM\Column]
   private ?int $studies_level = null;
 
+  #[Ignore]
   #[ORM\ManyToMany(targetEntity: Code::class, inversedBy: 'formations')]
   private Collection $codes;
 
+  #[Ignore]
   #[ORM\ManyToMany(targetEntity: Job::class, inversedBy: 'formations')]
   private Collection $jobs;
 
+  #[Ignore]
   #[ORM\ManyToMany(targetEntity: Condition::class, inversedBy: 'formations')]
   private Collection $conditions;
 
+  #[Ignore]
   #[ORM\ManyToMany(targetEntity: Cost::class, inversedBy: 'formations')]
   private Collection $costs;
 
+  #[Ignore]
   #[ORM\ManyToMany(targetEntity: Location::class, inversedBy: 'formations')]
   private Collection $locations;
 
+  #[Ignore]
   #[ORM\ManyToMany(targetEntity: self::class)]
   private Collection $sequels;
 
   #[ORM\Column]
   private ?int $duration = null;
 
+  #[Ignore]
   #[ORM\ManyToMany(targetEntity: Format::class, inversedBy: 'formations')]
   private Collection $formats;
 
