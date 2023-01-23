@@ -120,6 +120,18 @@ body {
 .cardFormation {
     width: 350px;
     height: 250px;
+    transition: all .5s;
+}
+
+.cardFormation:hover {
+    transform: scale(1.05);
+}
+
+.cardLineClamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
 }
 
 @media (max-width: 380px) {

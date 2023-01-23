@@ -4,7 +4,12 @@
 
 {% block body %}
 
+
 <div class="container py-5">
+{% if is_granted('IS_AUTHENTICATED_REMEMBERED') and is_granted('ROLE_ADMIN') %}
+  <a class="position-fixed bottom-0 start-0" href="{{ path('app_formation_type_edit', {'id': training.id}) }}"><img src="{{asset('build/img/edit-icon.svg')}}" class="m-2" alt="icon edit" title="Modifier l'entité"></a>
+{% endif %}
+<div class="container pt-3 pb-3">
   <div class="row">
     <h1 class="primary">{{ training.name|upper }}</h1>
     <h3>Equivalence BAC+{{ training.studiesLevel }}</h3>

@@ -9,6 +9,7 @@ use App\Repository\SkillRepository;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Bridge\Doctrine\Types\UuidType;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SkillRepository::class)]
 class Skill
@@ -20,12 +21,17 @@ class Skill
   private ?Uuid $id = null;
 
   #[ORM\Column(type: Types::TEXT)]
+  #[Assert\NotBlank]
   private ?string $descriptive = null;
 
   #[ORM\ManyToMany(targetEntity: Code::class, mappedBy: 'skills')]
   private Collection $codes;
 
   #[ORM\Column(length: 255, nullable: true)]
+  #[Assert\Length(
+    max: 255,
+    maxMessage: 'Le nom ne peut pas contenir plus de 255 caractères.',
+  )]
   private ?string $name = null;
 
   public function __construct()

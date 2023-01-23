@@ -19,6 +19,14 @@
 
     <div class="row mt-4">
         <div class="col-lg-10">
+            {{ form_label(form.descriptive, "Description :") }}
+            {{ form_widget(form.descriptive) }}
+            {{ form_errors(form.descriptive) }}
+        </div>   
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-10">
             {{ form_label(form.duration, 'Durée :') }}
             {{ form_widget(form.duration) }}
             {{ form_errors(form.duration) }}
@@ -78,6 +86,14 @@
             {{ form_label(form.sequels, "Suites possibles :") }}
             {{ form_widget(form.sequels) }}
             {{ form_errors(form.sequels) }}
+        </div>   
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-10">
+            {{ form_label(form.state, "État :") }}
+            {{ form_widget(form.state) }}
+            {{ form_errors(form.state) }}
         </div>   
     </div>
 
