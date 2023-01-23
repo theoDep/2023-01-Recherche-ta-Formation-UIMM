@@ -8,6 +8,7 @@ use App\Repository\FormationRepository;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Bridge\Doctrine\Types\UuidType;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: FormationRepository::class)]
 class Formation
@@ -19,9 +20,16 @@ class Formation
   private ?Uuid $id = null;
 
   #[ORM\Column(length: 255)]
+  #[Assert\NotBlank]
+  #[Assert\Length(
+    max: 255,
+    maxMessage: 'Le nom ne peut pas contenir plus de 255 caractères.',
+  )]
   private ?string $name = null;
 
   #[ORM\Column]
+  #[Assert\NotBlank]
+  #[Assert\PositiveOrZero]
   private ?int $studies_level = null;
 
   #[ORM\ManyToMany(targetEntity: Code::class, inversedBy: 'formations')]
@@ -43,10 +51,23 @@ class Formation
   private Collection $sequels;
 
   #[ORM\Column]
+  #[Assert\NotBlank]
+  #[Assert\Positive]
   private ?int $duration = null;
 
   #[ORM\ManyToMany(targetEntity: Format::class, inversedBy: 'formations')]
   private Collection $formats;
+
+  #[ORM\Column(length: 255)]
+  #[Assert\NotBlank]
+  #[Assert\Length(
+    max: 255,
+    maxMessage: 'La description ne peut pas contenir plus de 255 caractères.',
+  )]
+  private ?string $descriptive = null;
+
+  #[ORM\Column]
+  private ?bool $state = null;
 
   public function __construct()
   {
@@ -278,5 +299,29 @@ class Formation
     $this->formats->removeElement($format);
 
     return $this;
+  }
+
+  public function getDescriptive(): ?string
+  {
+      return $this->descriptive;
+  }
+
+  public function setDescriptive(string $descriptive): self
+  {
+      $this->descriptive = $descriptive;
+
+      return $this;
+  }
+
+  public function isState(): ?bool
+  {
+      return $this->state;
+  }
+
+  public function setState(bool $state): self
+  {
+      $this->state = $state;
+
+      return $this;
   }
 }

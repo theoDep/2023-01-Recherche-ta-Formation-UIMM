@@ -13,6 +13,7 @@
         <thead>
             <tr>
                 <th>Nom</th>
+                <th>État</th>
                 <th></th>
             </tr>
         </thead>
@@ -20,6 +21,13 @@
         {% for formation in formations %}
             <tr>
                 <td>{{ formation.name }}</td>
+                <td>
+                    {% if formation.state %}
+                        En ligne
+                    {% else %}
+                        Hors ligne
+                    {% endif %}
+                </td>
                 <td>
                     <div class="d-flex justify-content-around">
                         <a href="{{ path('app_formation_type_show', {'id': formation.id}) }}"><img src="{{asset('build/img/show-icon.svg')}}" alt="icon show" title="Voir l'entité"></a>

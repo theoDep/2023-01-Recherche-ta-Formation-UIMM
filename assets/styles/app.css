@@ -116,6 +116,12 @@ body {
 .cardFormation {
     width: 350px;
     height: 250px;
+    transition: all .5s;
+    cursor: pointer;
+}
+
+.cardFormation:hover {
+    transform: scale(1.05);
 }
 
 @media (max-width: 380px) {

@@ -8,6 +8,7 @@ use App\Repository\JobRepository;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Bridge\Doctrine\Types\UuidType;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: JobRepository::class)]
 class Job
@@ -19,6 +20,11 @@ class Job
   private ?Uuid $id = null;
 
   #[ORM\Column(length: 255)]
+  #[Assert\NotBlank]
+  #[Assert\Length(
+    max: 255,
+    maxMessage: 'Le nom ne peut pas contenir plus de 255 caractères.',
+  )]
   private ?string $name = null;
 
   #[ORM\ManyToMany(targetEntity: Formation::class, mappedBy: 'jobs')]
