@@ -8,7 +8,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 export default forwardRef(({ search, handleSubmit, handleChange }, ref) => {
   return (
     <>
-      <Form onSubmit={handleSubmit} className="w-50 m-auto">
+      <Form onSubmit={handleSubmit} className="w-75 w-lg-50 m-auto">
         <InputGroup className="mt-3 mb-5">
           <Form.Control
             type="text"
