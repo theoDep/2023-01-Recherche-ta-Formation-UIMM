@@ -8,6 +8,7 @@ use App\Repository\LocationRepository;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Bridge\Doctrine\Types\UuidType;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: LocationRepository::class)]
 class Location
@@ -19,16 +20,36 @@ class Location
   private ?Uuid $id = null;
 
   #[ORM\Column(length: 255)]
+  #[Assert\NotBlank]
+  #[Assert\Length(
+    max: 255,
+    maxMessage: 'La ligne 1 ne peut pas contenir plus de 255 caractères.',
+  )]
   private ?string $line_1 = null;
 
   #[ORM\Column(length: 255)]
+  #[Assert\NotBlank]
+  #[Assert\Length(
+    max: 255,
+    maxMessage: 'La ligne 2 ne peut pas contenir plus de 255 caractères.',
+  )]
   private ?string $line_2 = null;
 
   #[ORM\Column(length: 255)]
+  #[Assert\NotBlank]
+  #[Assert\Length(
+    max: 255,
+    maxMessage: 'La ville ne peut pas contenir plus de 255 caractères.',
+  )]
   private ?string $city = null;
 
   #[ORM\Column]
-  private ?int $zip_code = null;
+  #[Assert\NotBlank]
+  #[Assert\Length(
+    min: 5,
+    max: 5,
+  )]
+  private ?string $zip_code = null;
 
   #[ORM\ManyToMany(targetEntity: Formation::class, mappedBy: 'locations')]
   private Collection $formations;
@@ -84,12 +105,12 @@ class Location
     return $this;
   }
 
-  public function getZipCode(): ?int
+  public function getZipCode(): ?string
   {
     return $this->zip_code;
   }
 
-  public function setZipCode(int $zip_code): self
+  public function setZipCode(string $zip_code): self
   {
     $this->zip_code = $zip_code;
 

@@ -31,6 +31,16 @@
                     <td>{{ code.title }}</td>
                 </tr>
                 <tr>
+                    <th>Hiérarchie</th>
+                    <td>
+                        {% if code.isMain %}
+                            Code principal
+                        {% else %}
+                            Code secondaire
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
                     <th>Compétences</th>
                     <td>
                         {% for skill in code.skills %}

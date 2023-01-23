@@ -30,6 +30,9 @@ class Code
   #[ORM\ManyToMany(targetEntity: Skill::class, inversedBy: 'codes')]
   private Collection $skills;
 
+  #[ORM\Column]
+  private ?bool $is_main = null;
+
   public function __construct()
   {
     $this->formations = new ArrayCollection();
@@ -122,5 +125,17 @@ class Code
     $this->skills->removeElement($skill);
 
     return $this;
+  }
+
+  public function isIsMain(): ?bool
+  {
+      return $this->is_main;
+  }
+
+  public function setIsMain(bool $is_main): self
+  {
+      $this->is_main = $is_main;
+
+      return $this;
   }
 }

@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class TrainingController extends AbstractController
 {
-  #[Route('/training', name: 'app_training')]
+  #[Route('/', name: 'app_training')]
   public function index(FormationRepository $trainingRepository): Response
   {
     return $this->render('training/index.html.twig', [

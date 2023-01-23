@@ -3,11 +3,10 @@
 {% block title %}Formation | {{ training.name }}{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
+{% if is_granted('IS_AUTHENTICATED_REMEMBERED') and is_granted('ROLE_ADMIN') %}
+  <a class="position-fixed bottom-0 start-0" href="{{ path('app_formation_type_edit', {'id': training.id}) }}"><img src="{{asset('build/img/edit-icon.svg')}}" class="m-2" alt="icon edit" title="Modifier l'entité"></a>
+{% endif %}
 <div class="container pt-3 pb-3">
   <div class="row">
     <h1>{{ training.name }}</h1>

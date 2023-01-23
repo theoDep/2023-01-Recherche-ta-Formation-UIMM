@@ -19,6 +19,14 @@
 
     <div class="row mt-4">
         <div class="col-lg-10">
+            {{ form_label(form.is_main, "Hiérarchie :") }}
+            {{ form_widget(form.is_main) }}
+            {{ form_errors(form.is_main) }}
+        </div>   
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-10">
             {{ form_label(form.skills, 'Compétences :') }}
             {{ form_widget(form.skills) }}
             {{ form_errors(form.skills) }}

@@ -14,6 +14,7 @@
             <tr>
                 <th>Identifiant</th>
                 <th>Titre</th>
+                <th>Hiérarchie</th>
                 <th></th>
             </tr>
         </thead>
@@ -22,6 +23,12 @@
             <tr>
                 <td>{{ code.identifier }}</td>
                 <td>{{ code.title }}</td>
+                <td>
+                {% if code.isMain %}
+                    Code principal
+                {% else %}
+                    Code secondaire
+                {% endif %}</td>
                 <td>
                     <div class="d-flex justify-content-around">
                         <a href="{{ path('app_code_type_show', {'id': code.id}) }}"><img src="{{asset('build/img/show-icon.svg')}}" class="me-2" alt="icon show" title="Voir l'entité"></a>

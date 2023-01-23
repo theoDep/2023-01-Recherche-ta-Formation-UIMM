@@ -18,10 +18,14 @@
       
         <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-white p-0">
           <div class="container-fluid pe-0">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="{{path('app_training')}}">
               <img src="{{asset('build/img/logo.svg')}}" style="width: 75px;" alt="logo">
             </a>
-            <button type="button" onclick="location.href='{{path('app_login')}}';" class="btn btn-light px-4" style="z-index: 1;">Connexion</button>
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') and is_granted('ROLE_ADMIN') %}
+              <button type="button" onclick="location.href='{{path('app_formation_type_index')}}';" class="btn btn-light px-4" style="z-index: 1;">Administration</button>
+            {% else %}
+              <button type="button" onclick="location.href='{{path('app_login')}}';" class="btn btn-light px-4" style="z-index: 1;">Connexion</button>
+            {% endif %}
             <div class="d-flex position-absolute end-0">
               <div class="d-flex position-absolute end-0">
                 <div id="nav-motif-triangle2"></div>

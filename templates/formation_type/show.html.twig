@@ -24,8 +24,22 @@
                     <td>{{ formation.id }}</td>
                 </tr>
                 <tr>
+                    <th>État</th>
+                    <td>
+                        {% if formation.state %}
+                            En ligne
+                        {% else %}
+                            Hors ligne
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
                     <th>Nom</th>
                     <td>{{ formation.name }}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ formation.descriptive }}</td>
                 </tr>
                 <tr>
                     <th>Niveau d'étude</th>
