@@ -17,7 +17,6 @@ class LocationType extends AbstractType
             ->add('line_2')
             ->add('city')
             ->add('zip_code', NumberType::class)
-            ->add('formations')
         ;
     }
 

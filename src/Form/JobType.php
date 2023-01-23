@@ -13,7 +13,6 @@ class JobType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('formations')
         ;
     }
 

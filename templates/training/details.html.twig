@@ -28,7 +28,7 @@
     {% endfor %}
   </div>
   <div class="row">
-    <div class="col col-9 pt-5 pb-5">
+    <div class="col col-12 col-lg-9 pt-5 pb-5">
       {% for code in training.codes %}
         {% if not code.isMain %}
           <div class="row">
@@ -43,25 +43,32 @@
         {% endif %}
       {% endfor %}
     </div>
-    <div class="d-none d-lg-block col col-2 pt-5 pb-5 text-center">
-      <div class="card mb-3" style="max-width: 18rem;">
-        <div class="card-header bg-primary white">Durée de la formation</div>
-        <div class="card-body bg-white primary">
-          <p class="card-text">{{ training.duration }} H 00</p>
+    <div class="d-none d-lg-block col col-3 pt-5 pb-5 text-center">
+      {% if training.durationEntreprise %}
+        <div class="card mb-3" style="max-width: 18rem;">
+          <div class="card-header bg-primary white">Durée de la formation</div>
+          <div class="card-body bg-white primary">
+            <p class="card-text m-0">{{ training.duration }} H 00</p>
+            <i>dont {{training.durationEntreprise }} H 00 en entreprise</i>
+          </div>
         </div>
-      </div>
-      <div class="card white mb-3" style="max-width: 18rem;">
-        <div class="card-header bg-primary white">Resultats</div>
-        <div class="card-body bg-white primary">
-          <p class="card-text">XX %</p>
+      {% endif %}
+      {% if training.results %}
+        <div class="card white mb-3" style="max-width: 18rem;">
+          <div class="card-header bg-primary white">Resultats</div>
+          <div class="card-body bg-white primary">
+            <p class="card-text">{{ training.results }}</p>
+          </div>
         </div>
-      </div>
-      <div class="card white mb-3" style="max-width: 18rem;">
-        <div class="card-header bg-primary white">Certifications</div>
-        <div class="card-body bg-white primary">
-          <p class="card-text">{{ training.codes | length }} RNCP</p>
+      {% endif %}
+      {% if training.certifications %}
+        <div class="card white mb-3" style="max-width: 18rem;">
+          <div class="card-header bg-primary white">Certifications</div>
+          <div class="card-body bg-white primary">
+            <p class="card-text">{{ training.certifications }}</p>
+          </div>
         </div>
-      </div>
+      {% endif %}
     </div>
   </div>
   <div class="row text-align-center">
@@ -105,24 +112,31 @@
         </ul>
       </div>
       <div class="d-flex flex-wrap d-lg-none pt-5 pb-5 text-center">
-        <div class="card mb-3 mx-auto w-75" style="max-width: 18rem;">
-          <div class="card-header bg-primary white">Durée de la formation</div>
-          <div class="card-body bg-white primary">
-            <p class="card-text">{{ training.duration }} H 00</p>
+        {% if training.durationEntreprise %}
+          <div class="card mb-3 mx-auto w-75" style="max-width: 18rem;">
+            <div class="card-header bg-primary white">Durée de la formation</div>
+            <div class="card-body bg-white primary">
+              <p class="card-text m-0">{{ training.duration }} H 00</p>
+              <i>dont {{training.durationEntreprise }} H 00 en entreprise</i>
+            </div>
           </div>
-        </div>
-        <div class="card mb-3 mx-auto w-75" style="max-width: 18rem;">
-          <div class="card-header bg-primary white">Resultats</div>
-          <div class="card-body bg-white primary">
-            <p class="card-text">XX %</p>
+        {% endif %}
+        {% if training.results %}
+          <div class="card white mb-3 mx-auto w-75" style="max-width: 18rem;">
+            <div class="card-header bg-primary white">Resultats</div>
+            <div class="card-body bg-white primary">
+              <p class="card-text">{{ training.results }}</p>
+            </div>
           </div>
-        </div>
-        <div class="card mb-3 mx-auto w-75" style="max-width: 18rem;">
-          <div class="card-header bg-primary white">Certifications</div>
-          <div class="card-body bg-white primary">
-            <p class="card-text">{{ training.codes | length }} RNCP</p>
+        {% endif %}
+        {% if training.certifications %}
+          <div class="card white mb-3 mx-auto w-75" style="max-width: 18rem;">
+            <div class="card-header bg-primary white">Certifications</div>
+            <div class="card-body bg-white primary">
+              <p class="card-text">{{ training.certifications }}</p>
+            </div>
           </div>
-        </div>
+        {% endif %}
       </div>
     </div>
   </div>

@@ -83,10 +83,6 @@ body {
     height: 75px;
 }
 
-#navbar > .container-fluid > a > img {
-    margin-left: 40px !important;
-}
-
 #navbar > .container-fluid > button {
     margin-right: 50px !important;
 }

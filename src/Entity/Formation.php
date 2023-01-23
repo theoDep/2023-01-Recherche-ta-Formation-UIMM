@@ -77,6 +77,15 @@ class Formation
   #[ORM\Column]
   private ?bool $state = null;
 
+  #[ORM\Column(nullable: true)]
+  private ?int $duration_entreprise = null;
+
+  #[ORM\Column(length: 255, nullable: true)]
+  private ?string $results = null;
+
+  #[ORM\Column(length: 255, nullable: true)]
+  private ?string $certifications = null;
+
   public function __construct()
   {
     $this->codes = new ArrayCollection();
@@ -329,6 +338,42 @@ class Formation
   public function setState(bool $state): self
   {
       $this->state = $state;
+
+      return $this;
+  }
+
+  public function getDurationEntreprise(): ?int
+  {
+      return $this->duration_entreprise;
+  }
+
+  public function setDurationEntreprise(?int $duration_entreprise): self
+  {
+      $this->duration_entreprise = $duration_entreprise;
+
+      return $this;
+  }
+
+  public function getResults(): ?string
+  {
+      return $this->results;
+  }
+
+  public function setResults(?string $results): self
+  {
+      $this->results = $results;
+
+      return $this;
+  }
+
+  public function getCertifications(): ?string
+  {
+      return $this->certifications;
+  }
+
+  public function setCertifications(?string $certifications): self
+  {
+      $this->certifications = $certifications;
 
       return $this;
   }

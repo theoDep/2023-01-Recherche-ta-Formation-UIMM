@@ -35,6 +35,30 @@
 
     <div class="row mt-4">
         <div class="col-lg-10">
+            {{ form_label(form.duration_entreprise, 'Durée en entreprise:') }}
+            {{ form_widget(form.duration_entreprise) }}
+            {{ form_errors(form.duration_entreprise) }}
+        </div>   
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-10">
+            {{ form_label(form.results, 'Résultats:') }}
+            {{ form_widget(form.results) }}
+            {{ form_errors(form.results) }}
+        </div>   
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-10">
+            {{ form_label(form.certifications, 'Certifications:') }}
+            {{ form_widget(form.certifications) }}
+            {{ form_errors(form.certifications) }}
+        </div>   
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-10">
             {{ form_label(form.codes, 'Codes :') }}
             {{ form_widget(form.codes) }}
             {{ form_errors(form.codes) }}

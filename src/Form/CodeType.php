@@ -15,7 +15,6 @@ class CodeType extends AbstractType
         $builder
             ->add('identifier')
             ->add('title')
-            ->add('formations')
             ->add('is_main', ChoiceType::class, [
                 'choices'  => [
                   'Code principal' => true,

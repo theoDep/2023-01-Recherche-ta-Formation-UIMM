@@ -28,6 +28,9 @@ class FormationType extends AbstractType
       ->add('sequels')
       ->add('formats')
       ->add('duration')
+      ->add('duration_entreprise')
+      ->add('results')
+      ->add('certifications')
       ->add('state', ChoiceType::class, [
         'choices'  => [
           'Hors ligne' => false,

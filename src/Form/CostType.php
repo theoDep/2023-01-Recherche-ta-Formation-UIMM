@@ -13,7 +13,6 @@ class CostType extends AbstractType
     {
         $builder
             ->add('descriptive')
-            ->add('formations')
         ;
     }
 

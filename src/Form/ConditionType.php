@@ -13,7 +13,6 @@ class ConditionType extends AbstractType
     {
         $builder
             ->add('descriptive')
-            ->add('formations')
         ;
     }
 
