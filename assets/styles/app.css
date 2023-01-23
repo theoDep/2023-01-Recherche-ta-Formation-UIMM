@@ -19,6 +19,10 @@ body {
     background-color: #145774 !important;
 }
 
+.bg-red {
+    background-color: #E3051B;
+}
+
 .bg-dark-primary {
     background-color: #164459 !important;
 }

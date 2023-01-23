@@ -21,7 +21,7 @@ class Code
   #[ORM\Column(length: 255)]
   private ?string $identifier = null;
 
-  #[ORM\Column(length: 255)]
+  #[ORM\Column(length: 255, nullable: true)]
   private ?string $title = null;
 
   #[ORM\ManyToMany(targetEntity: Formation::class, mappedBy: 'codes')]
